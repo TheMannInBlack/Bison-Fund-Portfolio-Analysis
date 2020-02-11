@@ -1,0 +1,26 @@
+#The purpose of this document is store functions to easily create graphs,
+#calculate statistics, and manage the bison investment fund portfolio
+
+#This file stores functions, the functions should not be called within this file. 
+#DO NOT TOUCH ANYTHING IN HERE unless you know what you are doing.
+import pandas as pd
+import matplotlib as plt
+import numpy as np
+
+def Portfolio_return():
+    file = pd.read_csv("C:/Users/Busin/Desktop/School General/Bison Fund/Portfolio Analysis/Holdings2.csv")
+    df = pd.DataFrame(file)
+    Portfolio_return = df['Unrealized Gain/Loss'].sum()
+    Portfolio_return_percent = Portfolio_return / df['Cost Basis'].sum()
+    print('Overall Portfolio Return:' +"{:.2%}".format(Portfolio_return_percent))
+
+def Asset_class_return():
+    classes = ['Large cap', 'Mid cap', 'Fixed income']
+    for i in classes:
+        file = pd.read_csv("C:/Users/Busin/Desktop/School General/Bison Fund/Portfolio Analysis/Holdings2.csv")
+        df = pd.DataFrame(file)
+        df2 = df[df['Classification']== i]
+        Portfolio_return = df2['Unrealized Gain/Loss'].sum()
+        Portfolio_return_percent = Portfolio_return / df2['Cost Basis'].sum()
+    
+        print(i + ": " +"{:.2%}".format(Portfolio_return_percent))
